@@ -248,7 +248,7 @@ namespace WF_H_010_TypewritingGaming
                 MessageBox.Show("時間到！", "遊戲結束", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // 取得排行榜資料
-                List<RankModel> rankModels = new RankForm().GetRankModels();
+                List<RankModel> rankModels = RankHelper.GetRankModels();
                 // 判斷是否能進排行榜
                 if (rankModels.Count < 10 || rankModels.Where(x => x.Score < _score).Any())
                 {
@@ -275,8 +275,8 @@ namespace WF_H_010_TypewritingGaming
                             rankModels[i].Id = (i + 1).ToString();
                             newRank.Add(rankModels[i]);
                         }
-                        // 寫檔回去
-                        new RankForm().WriteRankFile(newRank);
+                        // 將排行榜資訊寫入檔案
+                        RankHelper.WriteRankFile(newRank);
                     }
                 }
                 return;

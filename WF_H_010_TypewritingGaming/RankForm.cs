@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WF_H_010_TypewritingGaming.Helper;
 
 namespace WF_H_010_TypewritingGaming
 {
@@ -30,39 +31,12 @@ namespace WF_H_010_TypewritingGaming
         }
 
         /// <summary>
-        /// 取得排行榜資料
+        /// 讀取排行榜檔案,並顯示在畫面上
         /// </summary>
-        /// <returns></returns>
-        public List<RankModel> GetRankModels()
-        {
-            // 讀檔
-            StreamReader sr = new StreamReader("rankRecords.txt");
-            string recordStr = sr.ReadToEnd();
-            sr.Close();
-
-            // 解析
-            List<RankModel> rankModels = new List<RankModel>();
-            foreach (string oneLine in recordStr.Split('\n'))
-            {
-                string[] datas = oneLine.Split(',');
-                // 只處理符合格式的資料
-                if (datas.Length == 3)
-                {
-                    rankModels.Add(new RankModel
-                    {
-                        Id = datas[0],
-                        Name = datas[1],
-                        Score = Convert.ToInt32(datas[2])
-                    });
-                }
-            }
-            return rankModels;
-        }
-
         private void LoadRankFile()
         {
             // 取得排行榜資料
-            List<RankModel> rankModels = GetRankModels();
+            List<RankModel> rankModels = RankHelper.GetRankModels();
 
             // 依序動態生成在畫面上
             int currentHeight = 0;
@@ -93,17 +67,6 @@ namespace WF_H_010_TypewritingGaming
                 plRecords.Controls.Add(scoreLabel);
 
                 currentHeight += 40;
-            }
-        }
-
-        public void WriteRankFile(List<RankModel> newRank)
-        {
-            using (StreamWriter sw = new StreamWriter("rankRecords.txt"))
-            {
-                foreach (var item in newRank)
-                {
-                    sw.WriteLine($"{item.Id},{item.Name},{item.Score}");
-                }
             }
         }
     }

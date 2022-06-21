@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Enums\GameStatus.cs" />
     <Compile Include="Enums\SoundEnum.cs" />
+    <Compile Include="Helper\RankHelper.cs" />
     <Compile Include="Helper\ResourcesHelper.cs" />
     <Compile Include="InputBoxForm.cs">
       <SubType>Form</SubType>
