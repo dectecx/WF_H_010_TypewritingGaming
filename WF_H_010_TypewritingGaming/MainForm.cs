@@ -6,6 +6,7 @@ using System.Media;
 using System.Windows.Forms;
 using WF_H_010_TypewritingGaming.Enums;
 using WF_H_010_TypewritingGaming.Helper;
+using WF_H_010_TypewritingGaming.Properties;
 
 // 音效同時播放需使用「WMPLib.WindowsMediaPlayer wplayer = new WMPLib.WindowsMediaPlayer);」
 // - 參考文章:https://stackoverflow.com/questions/4740262/playing-2-sounds-together-at-same-time
@@ -30,6 +31,11 @@ namespace WF_H_010_TypewritingGaming
         /// 遊戲狀態
         /// </summary>
         private GameStatus _gameStatus;
+
+        /// <summary>
+        /// 是否開啟圖片淡出效果(注意:很吃效能,畫面若太多圖片很容易卡當)
+        /// </summary>
+        private bool _isUseFadeOut;
 
         /// <summary>
         /// 遊戲最大時間
@@ -66,9 +72,14 @@ namespace WF_H_010_TypewritingGaming
             // 循環播放背景音效
             _backgroundSound = new SoundPlayer(ResourcesHelper.GetSoundStream(SoundEnum.BackgroundMusic));
             _backgroundSound.PlayLooping();
-
-            // 設定畫面fps
+            // 設定是否開啟圖片淡出效果(注意:很吃效能,畫面若太多圖片很容易卡當)
+            _isUseFadeOut = true;
+            // 設定遊戲最大時間
+            _maxGameTime = 60;
+            // 設定圖片生成速度
+            tmBubbleGenerate.Interval = 1000;
             // 設定降落速度
+            tmFall.Interval = 1000;
             // 設定圖片尺寸
             _asciiImgSize = 45;
 
@@ -76,17 +87,9 @@ namespace WF_H_010_TypewritingGaming
             tmCountdown.Stop();
             tmBubbleGenerate.Stop();
             tmFall.Stop();
-            _maxGameTime = 60;
             _lastTime = _maxGameTime;
             lblLastTime.Text = "倒數：" + _lastTime + "秒";
-            CalScore();
-        }
-
-        /// <summary>
-        /// 計算分數
-        /// </summary>
-        private void CalScore()
-        {
+            _score = 0;
             lblScore.Text = "得分：" + _score;
         }
 
@@ -117,8 +120,56 @@ namespace WF_H_010_TypewritingGaming
                 {
                     if ((int)picture.Tag == input)
                     {
-                        // 移除泡泡
-                        picture.Dispose();
+                        // 判斷是否開啟淡出圖片效果
+                        if (_isUseFadeOut)
+                        {
+                            // 答對先將Tag改為0
+                            picture.Tag = 0;
+                            // 圖片換成泡泡破裂
+                            picture.BackgroundImage = Resources.burst_bubble;
+                            picture.Width = (int)(picture.Height * 1.33);
+
+                            // 參考文章:https://stackoverflow.com/questions/960738/fading-out-an-image-with-transparency-in-winforms-ui-net3-5
+                            #region 圖片淡出處理
+                            // 透明度
+                            int alpha = 0;
+                            Timer fadeOutTimer = new Timer();
+                            fadeOutTimer.Interval = 30;
+                            fadeOutTimer.Tick += tmFadeOut;
+                            fadeOutTimer.Start();
+
+                            // 淡出計時器
+                            void tmFadeOut(object s, EventArgs eve)
+                            {
+                                // 若透明度尚未到完全透明,就持續增加透明度
+                                if (alpha++ < 255)
+                                {
+                                    Image image = picture.BackgroundImage;
+                                    using (Graphics g = Graphics.FromImage(image))
+                                    {
+                                        Pen pen = new Pen(Color.FromArgb(alpha, 255, 255, 255), image.Width);
+                                        g.DrawLine(pen, -1, -1, image.Width, image.Height);
+                                        g.Save();
+                                    }
+                                    picture.Image = image;
+                                }
+                                // 完全透明就關閉計時器並移除泡泡
+                                else
+                                {
+                                    fadeOutTimer.Stop();
+                                    // 移除泡泡
+                                    picture.Dispose();
+                                    fadeOutTimer.Dispose();
+                                }
+                            }
+                            #endregion
+                        }
+                        else
+                        {
+                            // 移除泡泡
+                            picture.Dispose();
+                        }
+
                         // 得分
                         _score += 5;
 
@@ -137,14 +188,13 @@ namespace WF_H_010_TypewritingGaming
             // 沒有任何一個泡泡答案吻合
             if (!isFound)
             {
-                // TODO: 切換圖片
                 // 播放音效
                 WMPLib.WindowsMediaPlayer wplayer = new WMPLib.WindowsMediaPlayer();
                 wplayer.URL = ResourcesHelper.GetSoundFilePath(SoundEnum.Error);
                 wplayer.controls.play();
             }
             // 計算分數
-            CalScore();
+            lblScore.Text = "得分：" + _score;
         }
 
         /// <summary>
@@ -192,7 +242,8 @@ namespace WF_H_010_TypewritingGaming
                 // 初始化
                 _lastTime = _maxGameTime;
                 lblLastTime.Text = "倒數：" + _lastTime + "秒";
-                CalScore();
+                _score = 0;
+                lblScore.Text = "得分：" + _score;
 
                 // 狀態改為遊戲暫停
                 _gameStatus = GameStatus.Gaming;
@@ -323,7 +374,8 @@ namespace WF_H_010_TypewritingGaming
                     picture.Top += _asciiImgSize;
 
                     // 如果圖片底部超過遊戲區塊,就刪除圖片 and 扣分 and 播放音效
-                    if (picture.Bottom > plGameRegion.Height)
+                    // 且答案不等於0 (0代表已經被答對了)
+                    if ((int)picture.Tag != 0 && picture.Bottom > plGameRegion.Height)
                     {
                         picture.Dispose();
                         // 每次扣3分,最低0分
@@ -342,7 +394,7 @@ namespace WF_H_010_TypewritingGaming
             }
 
             // 計算分數
-            CalScore();
+            lblScore.Text = "得分：" + _score;
         }
     }
 }
