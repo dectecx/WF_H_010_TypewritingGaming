@@ -59,49 +59,21 @@ namespace WF_H_010_TypewritingGaming
             // 亂數產生器
             _rand = new Random();
             // 循環播放背景音效
-            //_backgroundSound = new SoundPlayer(ResourcesHelper.GetSoundStream(SoundEnum.BackgroundMusic));
-            //_backgroundSound.PlayLooping();
-
-            // 依據當前遊戲狀態,刷新/管理前端元件
-            RefreshUI();
+            _backgroundSound = new SoundPlayer(ResourcesHelper.GetSoundStream(SoundEnum.BackgroundMusic));
+            _backgroundSound.PlayLooping();
 
             // 設定畫面fps
             // 設定降落速度
             // 設定圖片尺寸
             _asciiImgSize = 45;
-        }
 
-        /// <summary>
-        /// 依據當前遊戲狀態,刷新/管理前端元件
-        /// </summary>
-        private void RefreshUI()
-        {
-            // 遊戲中
-            if (_gameStatus == GameStatus.Gaming)
-            {
-
-            }
-            // 遊戲暫停
-            else if (_gameStatus == GameStatus.Stop)
-            {
-
-            }
-            // 遊戲結束
-            else if (_gameStatus == GameStatus.GameOver)
-            {
-
-            }
-            // 剛啟動遊戲
-            else
-            {
-                // 初始化
-                tmCountdown.Stop();
-                tmBubbleGenerate.Stop();
-                tmFall.Stop();
-                _lastTime = 60;
-                lblLastTime.Text = "倒數：" + _lastTime + "秒";
-                CalScore();
-            }
+            // 初始化
+            tmCountdown.Stop();
+            tmBubbleGenerate.Stop();
+            tmFall.Stop();
+            _lastTime = 60;
+            lblLastTime.Text = "倒數：" + _lastTime + "秒";
+            CalScore();
         }
 
         /// <summary>
@@ -121,6 +93,12 @@ namespace WF_H_010_TypewritingGaming
         /// <param name="e"></param>
         private void MainForm_KeyPress(object sender, KeyPressEventArgs e)
         {
+            // 只有在遊戲中才監聽
+            if (_gameStatus != GameStatus.Gaming)
+            {
+                return;
+            }
+
             // 按下的按鈕
             int input = e.KeyChar;
             // 紀錄是否有找到至少一個符合的
@@ -170,13 +148,12 @@ namespace WF_H_010_TypewritingGaming
         /// <param name="e"></param>
         private void btnStart_Click(object sender, EventArgs e)
         {
-            // 當前狀態為剛啟動 or 遊戲暫停 || 遊戲結束
+            // 當前狀態為剛啟動 or 遊戲暫停
             if (_gameStatus == GameStatus.GameInitial ||
-                _gameStatus == GameStatus.Stop ||
-                _gameStatus == GameStatus.GameOver)
+                _gameStatus == GameStatus.Stop)
             {
                 // 狀態改為遊戲暫停
-                _gameStatus = GameStatus.Stop;
+                _gameStatus = GameStatus.Gaming;
                 // 啟動倒數計時timer
                 tmCountdown.Start();
                 // 啟動圖片生成timer
@@ -190,7 +167,7 @@ namespace WF_H_010_TypewritingGaming
             else if (_gameStatus == GameStatus.Gaming)
             {
                 // 狀態改為遊戲中
-                _gameStatus = GameStatus.Gaming;
+                _gameStatus = GameStatus.Stop;
                 // 暫停倒數計時timer
                 tmCountdown.Stop();
                 // 暫停圖片生成timer
@@ -199,6 +176,25 @@ namespace WF_H_010_TypewritingGaming
                 tmFall.Stop();
                 btnStart.Text = "繼續遊戲";
                 btnStart.BackColor = Color.LightGreen;
+            }
+            // 當前狀態為剛啟動 or 遊戲暫停 || 遊戲結束
+            else if (_gameStatus == GameStatus.GameOver)
+            {
+                // 初始化
+                _lastTime = 60;
+                lblLastTime.Text = "倒數：" + _lastTime + "秒";
+                CalScore();
+
+                // 狀態改為遊戲暫停
+                _gameStatus = GameStatus.Gaming;
+                // 啟動倒數計時timer
+                tmCountdown.Start();
+                // 啟動圖片生成timer
+                tmBubbleGenerate.Start();
+                // 啟動圖片掉落timer
+                tmFall.Start();
+                btnStart.Text = "暫停遊戲";
+                btnStart.BackColor = Color.LightPink;
             }
             else
             {
@@ -248,7 +244,7 @@ namespace WF_H_010_TypewritingGaming
                     InputBoxForm inputBox = new InputBoxForm();
                     DialogResult result = inputBox.ShowDialog();
                     // 要按確定才寫入,若使用者按取消,則不寫入
-                    if (result == DialogResult.OK)
+                    if (inputBox.GetIsOk())
                     {
                         // 將逗點移除,避免字串分析時會有bug
                         var intputMsg = inputBox.GetMsg().Replace(",", "");
@@ -263,7 +259,7 @@ namespace WF_H_010_TypewritingGaming
                         rankModels = rankModels.OrderByDescending(x => x.Score).ToList();
                         // 取前10個
                         List<RankModel> newRank = new List<RankModel>();
-                        for (int i = 0; i < 10 || i < rankModels.Count(); i++)
+                        for (int i = 0; i < 10 && i < rankModels.Count(); i++)
                         {
                             rankModels[i].Id = (i + 1).ToString();
                             newRank.Add(rankModels[i]);
@@ -312,8 +308,8 @@ namespace WF_H_010_TypewritingGaming
             {
                 if (item is PictureBox picture)
                 {
-                    // 向下掉落半張圖片高度
-                    picture.Top += _asciiImgSize / 2;
+                    // 向下掉落1張圖片高度
+                    picture.Top += _asciiImgSize;
 
                     // 如果圖片底部超過遊戲區塊,就刪除圖片 and 扣分 and 播放音效
                     if (item.Bottom > plGameRegion.Height)

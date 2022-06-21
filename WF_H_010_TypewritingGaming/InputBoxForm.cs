@@ -6,6 +6,11 @@ namespace WF_H_010_TypewritingGaming
     public partial class InputBoxForm : Form
     {
         /// <summary>
+        /// 是否按下確定
+        /// </summary>
+        private bool IsOk;
+
+        /// <summary>
         /// 輸入的訊息
         /// </summary>
         private string Msg;
@@ -28,12 +33,22 @@ namespace WF_H_010_TypewritingGaming
         }
 
         /// <summary>
+        /// 取得是否按下確定
+        /// </summary>
+        /// <returns></returns>
+        public bool GetIsOk()
+        {
+            return IsOk;
+        }
+
+        /// <summary>
         /// 確定按鈕
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnOK_Click(object sender, EventArgs e)
         {
+            IsOk = true;
             Msg = txtInput.Text;
             this.Close();
         }
@@ -45,6 +60,7 @@ namespace WF_H_010_TypewritingGaming
         /// <param name="e"></param>
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            IsOk = false;
             this.Close();
         }
     }
