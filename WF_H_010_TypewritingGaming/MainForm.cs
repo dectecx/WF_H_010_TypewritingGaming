@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Media;
 using System.Windows.Forms;
 using WF_H_010_TypewritingGaming.Enums;
+using WF_H_010_TypewritingGaming.Helper;
 using WF_H_010_TypewritingGaming.Models;
-using WF_H_010_TypewritingGaming.Services;
 
 namespace WF_H_010_TypewritingGaming
 {
@@ -17,11 +18,6 @@ namespace WF_H_010_TypewritingGaming
         /// 亂數產生器
         /// </summary>
         private Random _rand;
-
-        /// <summary>
-        /// 音效服務
-        /// </summary>
-        private SoundService _soundService;
 
         /// <summary>
         /// 背景音效
@@ -49,11 +45,9 @@ namespace WF_H_010_TypewritingGaming
 
             // 亂數產生器
             _rand = new Random();
-            // 啟用音效服務
-            _soundService = new SoundService();
             // 循環播放背景音效
-            _backgroundSound = new SoundPlayer(_soundService.GetSoundStream(SoundEnum.BackgroundMusic));
-            _backgroundSound.PlayLooping();
+            //_backgroundSound = new SoundPlayer(new MemoryStream(ResourcesHelper.GetSoundStream(SoundEnum.BackgroundMusic)));
+            //_backgroundSound.PlayLooping();
 
             // 初始化
             _lastTime = 60;
@@ -131,10 +125,11 @@ namespace WF_H_010_TypewritingGaming
             // 亂數決定ASCII Code (範圍33-123)
             int asciiCode = _rand.Next(33, 126);
 
-            // 產生一個ASCII圖片
+            // 產生一個ASCII圖片物件
             PictureBox picture = new PictureBox();
-            picture.Height = 20;
-            picture.Width = 20;
+            picture.Image = ResourcesHelper.GetAsciiBitmap(asciiCode);
+            //picture.Height = 20;
+            //picture.Width = 20;
             // 答案存在tag內
             picture.Tag = asciiCode;
             picture.Top = 0;

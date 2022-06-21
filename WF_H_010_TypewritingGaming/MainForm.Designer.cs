@@ -107,7 +107,6 @@
             // 
             // tmFall
             // 
-            this.tmFall.Enabled = true;
             this.tmFall.Interval = 1000;
             this.tmFall.Tick += new System.EventHandler(this.tmFall_Tick);
             // 
