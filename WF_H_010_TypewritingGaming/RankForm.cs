@@ -67,19 +67,19 @@ namespace WF_H_010_TypewritingGaming
                 Label idLabel = new Label();
                 idLabel.Text = item.Id;
                 idLabel.Left = lblAnchorId.Left;
-                idLabel.Height = currentHeight;
+                idLabel.Top = currentHeight;
                 plRecords.Controls.Add(idLabel);
 
                 Label nameLabel = new Label();
                 nameLabel.Text = item.Name;
                 nameLabel.Left = lblAnchorName.Left;
-                nameLabel.Height = currentHeight;
+                nameLabel.Top = currentHeight;
                 plRecords.Controls.Add(nameLabel);
 
                 Label scoreLabel = new Label();
                 scoreLabel.Text = item.Score.ToString();
                 scoreLabel.Left = lblAnchorScore.Left;
-                scoreLabel.Height = currentHeight;
+                scoreLabel.Top = currentHeight;
                 plRecords.Controls.Add(scoreLabel);
 
                 currentHeight += 30;

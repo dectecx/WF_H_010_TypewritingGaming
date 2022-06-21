@@ -180,6 +180,16 @@ namespace WF_H_010_TypewritingGaming
             // 當前狀態為剛啟動 or 遊戲暫停 || 遊戲結束
             else if (_gameStatus == GameStatus.GameOver)
             {
+                // 清除所有泡泡,找出遊戲區塊內所有圖片物件
+                foreach (Control item in plGameRegion.Controls)
+                {
+                    if (item is PictureBox picture)
+                    {
+                        // 移除泡泡
+                        item.Dispose();
+                    }
+                }
+
                 // 初始化
                 _lastTime = 60;
                 lblLastTime.Text = "倒數：" + _lastTime + "秒";
@@ -225,6 +235,7 @@ namespace WF_H_010_TypewritingGaming
             lblLastTime.Text = "倒數：" + _lastTime + "秒";
             if (_lastTime <= 0)
             {
+                _gameStatus = GameStatus.GameOver;
                 tmCountdown.Stop();
                 tmBubbleGenerate.Stop();
                 tmFall.Stop();
