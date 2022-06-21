@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace WF_H_010_TypewritingGaming
 {
-    public partial class Form1 : Form
+    public partial class RankForm : Form
     {
-        public Form1()
+        public RankForm()
         {
             InitializeComponent();
         }

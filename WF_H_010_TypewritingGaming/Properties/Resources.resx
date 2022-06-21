@@ -46,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,6 +60,7 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -68,9 +69,10 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="name" use="required" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
@@ -85,9 +87,10 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -109,9 +112,319 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="BackgroundMusic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sounds\backgroundmusic.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="bg_main" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\bg_main.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bg_rank" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\bg_rank.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bounce" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sounds\bounce.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="burst_bubble" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\burst_bubble.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Congratulations" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sounds\congratulations.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Correct" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sounds\correct.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Error" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sounds\error.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="full_bubble" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\full_bubble.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_100" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_101" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\101.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_102" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\102.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_103" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\103.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_104" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\104.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_105" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\105.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_106" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\106.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_107" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\107.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_108" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\108.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_109" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\109.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_110" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\110.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_111" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\111.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_112" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\112.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_113" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\113.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_114" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\114.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_115" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\115.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_116" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\116.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_117" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\117.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_118" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\118.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_119" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\119.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_120" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\120.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_121" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\121.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_122" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\122.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_123" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\123.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_124" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\124.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_125" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\125.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_126" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\126.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_33" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\33.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_34" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\34.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_35" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\35.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_36" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\36.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_37" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\37.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_38" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\38.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_39" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\39.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_40" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\40.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_41" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\41.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_42" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\42.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_43" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\43.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_44" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\44.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_45" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\45.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_46" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\46.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_47" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\47.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_49" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\49.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_50" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\50.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_51" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\51.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_52" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\52.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_53" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\53.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_54" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\54.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_55" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\55.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_56" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\56.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_57" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\57.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_58" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\58.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_59" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\59.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_60" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\60.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_61" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\61.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_62" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\62.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_63" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\63.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_65" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\65.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_66" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\66.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_67" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\67.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_68" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\68.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_69" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\69.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_70" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\70.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_71" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\71.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_72" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\72.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_73" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\73.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_74" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\74.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_75" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\75.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_76" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\76.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_77" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\77.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_78" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\78.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_79" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\79.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_80" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\80.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_81" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\81.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_82" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\82.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_83" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\83.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_84" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\84.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_85" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\85.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_86" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\86.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_87" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\87.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_88" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\88.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_89" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\89.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_90" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\90.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_91" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\91.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_92" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\92.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_93" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\93.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_94" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\94.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_95" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\95.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_96" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\96.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_97" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\97.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_98" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\98.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_99" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\ascii_bubble\99.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
