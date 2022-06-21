@@ -35,6 +35,11 @@ namespace WF_H_010_TypewritingGaming
         private int _score;
 
         /// <summary>
+        /// 圖片尺寸
+        /// </summary>
+        private int _asciiImgSize;
+
+        /// <summary>
         /// 建構子
         /// </summary>
         public MainForm()
@@ -53,6 +58,8 @@ namespace WF_H_010_TypewritingGaming
             _lastTime = 60;
             lblLastTime.Text = "倒數：" + _lastTime + "秒";
             CalScore();
+
+            _asciiImgSize = 45;
         }
 
         /// <summary>
@@ -65,13 +72,15 @@ namespace WF_H_010_TypewritingGaming
 
         /// <summary>
         /// 表單鍵盤鍵入事件
+        /// 要預先在表單設計那邊將KeyPreview這個屬性改成true,鍵盤相關事件才會有效
+        /// 參考文章:https://docs.microsoft.com/zh-tw/dotnet/desktop/winforms/input-keyboard/how-to-handle-forms?view=netdesktop-6.0
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void MainForm_KeyPress(object sender, KeyPressEventArgs e)
         {
             // 按下的按鈕
-            string input = e.KeyChar.ToString();
+            int input = e.KeyChar;
             // 紀錄是否有找到至少一個符合的
             bool isFound = false;
 
@@ -80,7 +89,7 @@ namespace WF_H_010_TypewritingGaming
             {
                 if (item is PictureBox picture)
                 {
-                    if ((string)item.Tag == input)
+                    if ((int)item.Tag == input)
                     {
                         // 移除泡泡
                         item.Dispose();
@@ -179,8 +188,8 @@ namespace WF_H_010_TypewritingGaming
             picture.BackgroundImage = ResourcesHelper.GetAsciiBitmap(asciiCode);
             // 設定圖片形式為延展
             picture.BackgroundImageLayout = ImageLayout.Stretch;
-            picture.Height = 50;
-            picture.Width = 50;
+            picture.Height = _asciiImgSize;
+            picture.Width = _asciiImgSize;
             // 答案存在tag內
             picture.Tag = asciiCode;
             picture.Top = 0;
@@ -200,8 +209,8 @@ namespace WF_H_010_TypewritingGaming
             {
                 if (item is PictureBox picture)
                 {
-                    // 向下掉落
-                    picture.Top += 5;
+                    // 向下掉落半張圖片高度
+                    picture.Top += _asciiImgSize / 2;
 
                     // 如果超過遊戲區塊,就刪除圖片+扣分+播放音效
                     if (item.Top > plGameRegion.Height)

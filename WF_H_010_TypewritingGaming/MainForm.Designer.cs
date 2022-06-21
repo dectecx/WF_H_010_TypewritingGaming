@@ -121,6 +121,7 @@
             this.Controls.Add(this.btnRank);
             this.Controls.Add(this.plGameRegion);
             this.DoubleBuffered = true;
+            this.KeyPreview = true;
             this.Name = "MainForm";
             this.Text = "Form1";
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MainForm_KeyPress);
