@@ -45,12 +45,16 @@ namespace WF_H_010_TypewritingGaming
             foreach (string oneLine in recordStr.Split('\n'))
             {
                 string[] datas = oneLine.Split(',');
-                rankModels.Add(new RankModel
+                // 只處理符合格式的資料
+                if (datas.Length == 3)
                 {
-                    Id = datas[0],
-                    Name = datas[1],
-                    Score = Convert.ToInt32(datas[2])
-                });
+                    rankModels.Add(new RankModel
+                    {
+                        Id = datas[0],
+                        Name = datas[1],
+                        Score = Convert.ToInt32(datas[2])
+                    });
+                }
             }
             return rankModels;
         }
@@ -88,7 +92,7 @@ namespace WF_H_010_TypewritingGaming
                 scoreLabel.ForeColor = Color.White;
                 plRecords.Controls.Add(scoreLabel);
 
-                currentHeight += 30;
+                currentHeight += 40;
             }
         }
 

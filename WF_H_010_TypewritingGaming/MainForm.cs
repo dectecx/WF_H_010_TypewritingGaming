@@ -32,6 +32,11 @@ namespace WF_H_010_TypewritingGaming
         private GameStatus _gameStatus;
 
         /// <summary>
+        /// 遊戲最大時間
+        /// </summary>
+        private int _maxGameTime;
+
+        /// <summary>
         /// 剩餘時間
         /// </summary>
         private int _lastTime;
@@ -71,7 +76,8 @@ namespace WF_H_010_TypewritingGaming
             tmCountdown.Stop();
             tmBubbleGenerate.Stop();
             tmFall.Stop();
-            _lastTime = 60;
+            _maxGameTime = 3;
+            _lastTime = _maxGameTime;
             lblLastTime.Text = "倒數：" + _lastTime + "秒";
             CalScore();
         }
@@ -109,10 +115,10 @@ namespace WF_H_010_TypewritingGaming
             {
                 if (item is PictureBox picture)
                 {
-                    if ((int)item.Tag == input)
+                    if ((int)picture.Tag == input)
                     {
                         // 移除泡泡
-                        item.Dispose();
+                        picture.Dispose();
                         // 得分
                         _score += 5;
 
@@ -186,12 +192,12 @@ namespace WF_H_010_TypewritingGaming
                     if (item is PictureBox picture)
                     {
                         // 移除泡泡
-                        item.Dispose();
+                        picture.Dispose();
                     }
                 }
 
                 // 初始化
-                _lastTime = 60;
+                _lastTime = _maxGameTime;
                 lblLastTime.Text = "倒數：" + _lastTime + "秒";
                 CalScore();
 
@@ -204,7 +210,7 @@ namespace WF_H_010_TypewritingGaming
                 // 啟動圖片掉落timer
                 tmFall.Start();
                 btnStart.Text = "暫停遊戲";
-                btnStart.BackColor = Color.LightPink;
+                btnStart.BackColor = Color.LightGreen;
             }
             else
             {
@@ -323,9 +329,9 @@ namespace WF_H_010_TypewritingGaming
                     picture.Top += _asciiImgSize;
 
                     // 如果圖片底部超過遊戲區塊,就刪除圖片 and 扣分 and 播放音效
-                    if (item.Bottom > plGameRegion.Height)
+                    if (picture.Bottom > plGameRegion.Height)
                     {
-                        item.Dispose();
+                        picture.Dispose();
                         // 每次扣3分,最低0分
                         _score -= 3;
                         if (_score < 0)
