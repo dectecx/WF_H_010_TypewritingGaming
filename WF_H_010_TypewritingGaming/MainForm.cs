@@ -50,7 +50,19 @@ namespace WF_H_010_TypewritingGaming
             //_backgroundSound.PlayLooping();
 
             // 初始化
+            tmCountdown.Stop();
+            tmFall.Stop();
             _lastTime = 60;
+            lblLastTime.Text = "倒數：" + _lastTime + "秒";
+            CalScore();
+        }
+
+        /// <summary>
+        /// 計算分數
+        /// </summary>
+        private void CalScore()
+        {
+            lblScore.Text = "得分：" + _score;
         }
 
         /// <summary>
@@ -76,6 +88,8 @@ namespace WF_H_010_TypewritingGaming
                 // TODO: 播放音效
                 // TODO: 切換圖片
             }
+            // 計算分數
+            CalScore();
         }
 
         /// <summary>
@@ -121,6 +135,7 @@ namespace WF_H_010_TypewritingGaming
         private void tmCountdown_Tick(object sender, EventArgs e)
         {
             _lastTime--;
+            lblLastTime.Text = "倒數：" + _lastTime + "秒";
 
             // 亂數決定ASCII Code (範圍33-123)
             int asciiCode = _rand.Next(33, 126);
@@ -165,6 +180,9 @@ namespace WF_H_010_TypewritingGaming
                     }
                 }
             }
+
+            // 計算分數
+            CalScore();
         }
     }
 }

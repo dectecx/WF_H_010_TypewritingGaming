@@ -101,7 +101,6 @@
             // 
             // tmCountdown
             // 
-            this.tmCountdown.Enabled = true;
             this.tmCountdown.Interval = 1000;
             this.tmCountdown.Tick += new System.EventHandler(this.tmCountdown_Tick);
             // 
