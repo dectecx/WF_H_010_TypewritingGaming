@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Media;
 using System.Windows.Forms;
 using WF_H_010_TypewritingGaming.Enums;
@@ -25,6 +27,11 @@ namespace WF_H_010_TypewritingGaming
         private SoundPlayer _backgroundSound;
 
         /// <summary>
+        /// 遊戲狀態
+        /// </summary>
+        private GameStatus _gameStatus;
+
+        /// <summary>
         /// 剩餘時間
         /// </summary>
         private int _lastTime;
@@ -46,20 +53,55 @@ namespace WF_H_010_TypewritingGaming
         {
             InitializeComponent();
 
+            // 設定遊戲狀態
+            _gameStatus = GameStatus.GameInitial;
+
             // 亂數產生器
             _rand = new Random();
             // 循環播放背景音效
-            _backgroundSound = new SoundPlayer(ResourcesHelper.GetSoundStream(SoundEnum.BackgroundMusic));
-            _backgroundSound.PlayLooping();
+            //_backgroundSound = new SoundPlayer(ResourcesHelper.GetSoundStream(SoundEnum.BackgroundMusic));
+            //_backgroundSound.PlayLooping();
 
-            // 初始化
-            tmCountdown.Stop();
-            tmFall.Stop();
-            _lastTime = 60;
-            lblLastTime.Text = "倒數：" + _lastTime + "秒";
-            CalScore();
+            // 依據當前遊戲狀態,刷新/管理前端元件
+            RefreshUI();
 
+            // 設定畫面fps
+            // 設定降落速度
+            // 設定圖片尺寸
             _asciiImgSize = 45;
+        }
+
+        /// <summary>
+        /// 依據當前遊戲狀態,刷新/管理前端元件
+        /// </summary>
+        private void RefreshUI()
+        {
+            // 遊戲中
+            if (_gameStatus == GameStatus.Gaming)
+            {
+
+            }
+            // 遊戲暫停
+            else if (_gameStatus == GameStatus.Stop)
+            {
+
+            }
+            // 遊戲結束
+            else if (_gameStatus == GameStatus.GameOver)
+            {
+
+            }
+            // 剛啟動遊戲
+            else
+            {
+                // 初始化
+                tmCountdown.Stop();
+                tmBubbleGenerate.Stop();
+                tmFall.Stop();
+                _lastTime = 60;
+                lblLastTime.Text = "倒數：" + _lastTime + "秒";
+                CalScore();
+            }
         }
 
         /// <summary>
@@ -128,20 +170,39 @@ namespace WF_H_010_TypewritingGaming
         /// <param name="e"></param>
         private void btnStart_Click(object sender, EventArgs e)
         {
-            // TODO: 待補齊按鈕邏輯
-            if (btnStart.Text != "暫停")
+            // 當前狀態為剛啟動 or 遊戲暫停 || 遊戲結束
+            if (_gameStatus == GameStatus.GameInitial ||
+                _gameStatus == GameStatus.Stop ||
+                _gameStatus == GameStatus.GameOver)
             {
-                tmCountdown.Start(); // 圖片生成timer啟動
-                tmFall.Start(); // 圖片掉落timer啟動
-                btnStart.Text = "暫停";
+                // 狀態改為遊戲暫停
+                _gameStatus = GameStatus.Stop;
+                // 啟動倒數計時timer
+                tmCountdown.Start();
+                // 啟動圖片生成timer
+                tmBubbleGenerate.Start();
+                // 啟動圖片掉落timer
+                tmFall.Start();
+                btnStart.Text = "暫停遊戲";
                 btnStart.BackColor = Color.LightPink;
+            }
+            // 當前狀態為遊戲中
+            else if (_gameStatus == GameStatus.Gaming)
+            {
+                // 狀態改為遊戲中
+                _gameStatus = GameStatus.Gaming;
+                // 暫停倒數計時timer
+                tmCountdown.Stop();
+                // 暫停圖片生成timer
+                tmBubbleGenerate.Stop();
+                // 暫停圖片掉落timer
+                tmFall.Stop();
+                btnStart.Text = "繼續遊戲";
+                btnStart.BackColor = Color.LightGreen;
             }
             else
             {
-                tmCountdown.Stop(); // 圖片生成timer暫停
-                tmFall.Stop(); // 圖片掉落timer暫停
-                btnStart.Text = "重新挑戰";
-                btnStart.BackColor = Color.LightGreen;
+                MessageBox.Show("發生錯誤，出現未知的遊戲狀態:" + _gameStatus, "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -169,6 +230,7 @@ namespace WF_H_010_TypewritingGaming
             if (_lastTime <= 0)
             {
                 tmCountdown.Stop();
+                tmBubbleGenerate.Stop();
                 tmFall.Stop();
                 btnStart.Text = "重新挑戰";
 
@@ -177,9 +239,50 @@ namespace WF_H_010_TypewritingGaming
                 wplayer.URL = ResourcesHelper.GetSoundFilePath(SoundEnum.Congratulations);
                 wplayer.controls.play();
                 MessageBox.Show("時間到！", "遊戲結束", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // 取得排行榜資料
+                List<RankModel> rankModels = new RankForm().GetRankModels();
+                // 判斷是否能進排行榜
+                if (rankModels.Count < 10 || rankModels.Where(x => x.Score < _score).Any())
+                {
+                    InputBoxForm inputBox = new InputBoxForm();
+                    DialogResult result = inputBox.ShowDialog();
+                    // 要按確定才寫入,若使用者按取消,則不寫入
+                    if (result == DialogResult.OK)
+                    {
+                        // 將逗點移除,避免字串分析時會有bug
+                        var intputMsg = inputBox.GetMsg().Replace(",", "");
+                        RankModel model = new RankModel
+                        {
+                            Name = intputMsg,
+                            Score = _score
+                        };
+
+                        rankModels.Add(model);
+                        // 排序
+                        rankModels = rankModels.OrderByDescending(x => x.Score).ToList();
+                        // 取前10個
+                        List<RankModel> newRank = new List<RankModel>();
+                        for (int i = 0; i < 10 || i < rankModels.Count(); i++)
+                        {
+                            rankModels[i].Id = (i + 1).ToString();
+                            newRank.Add(rankModels[i]);
+                        }
+                        // 寫檔回去
+                        new RankForm().WriteRankFile(newRank);
+                    }
+                }
                 return;
             }
+        }
 
+        /// <summary>
+        /// 泡泡生成計時器
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tmBubbleGenerate_Tick(object sender, EventArgs e)
+        {
             // 亂數決定ASCII Code (範圍33-123)
             int asciiCode = _rand.Next(33, 126);
 
@@ -212,8 +315,8 @@ namespace WF_H_010_TypewritingGaming
                     // 向下掉落半張圖片高度
                     picture.Top += _asciiImgSize / 2;
 
-                    // 如果超過遊戲區塊,就刪除圖片+扣分+播放音效
-                    if (item.Top > plGameRegion.Height)
+                    // 如果圖片底部超過遊戲區塊,就刪除圖片 and 扣分 and 播放音效
+                    if (item.Bottom > plGameRegion.Height)
                     {
                         item.Dispose();
                         // 每次扣3分,最低0分

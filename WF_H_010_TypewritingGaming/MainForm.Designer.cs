@@ -37,11 +37,13 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.tmCountdown = new System.Windows.Forms.Timer(this.components);
             this.tmFall = new System.Windows.Forms.Timer(this.components);
+            this.tmBubbleGenerate = new System.Windows.Forms.Timer(this.components);
             this.plGameInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // plGameRegion
             // 
+            this.plGameRegion.BackColor = System.Drawing.Color.MintCream;
             this.plGameRegion.Location = new System.Drawing.Point(265, 12);
             this.plGameRegion.Name = "plGameRegion";
             this.plGameRegion.Size = new System.Drawing.Size(618, 479);
@@ -109,6 +111,11 @@
             this.tmFall.Interval = 1000;
             this.tmFall.Tick += new System.EventHandler(this.tmFall_Tick);
             // 
+            // tmBubbleGenerate
+            // 
+            this.tmBubbleGenerate.Interval = 1000;
+            this.tmBubbleGenerate.Tick += new System.EventHandler(this.tmBubbleGenerate_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -141,6 +148,7 @@
         private System.Windows.Forms.Label lblLastTime;
         private System.Windows.Forms.Timer tmCountdown;
         private System.Windows.Forms.Timer tmFall;
+        private System.Windows.Forms.Timer tmBubbleGenerate;
     }
 }
 
