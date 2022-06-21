@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Media;
 using System.Windows.Forms;
 using WF_H_010_TypewritingGaming.Enums;
 using WF_H_010_TypewritingGaming.Helper;
-using WF_H_010_TypewritingGaming.Models;
+
+// 音效同時播放需使用「WMPLib.WindowsMediaPlayer wplayer = new WMPLib.WindowsMediaPlayer);」
+// - 參考文章:https://stackoverflow.com/questions/4740262/playing-2-sounds-together-at-same-time
+// 若要使用「WMPLib.WindowsMediaPlayer」,專案需要加入參考Windows Media Player
+// - 參考文章:https://olivermode.pixnet.net/blog/post/305842398
 
 namespace WF_H_010_TypewritingGaming
 {
@@ -35,10 +35,8 @@ namespace WF_H_010_TypewritingGaming
         private int _score;
 
         /// <summary>
-        /// 當前泡泡清單
+        /// 建構子
         /// </summary>
-        private List<BubbleModel> _currentBubbles;
-
         public MainForm()
         {
             InitializeComponent();
@@ -74,19 +72,41 @@ namespace WF_H_010_TypewritingGaming
         {
             // 按下的按鈕
             string input = e.KeyChar.ToString();
-            // 若畫面有多個,只取最早出現的那個(一次只消除一個)
-            BubbleModel bubble = _currentBubbles.Where(x => x.Answer == input).FirstOrDefault();
-            if (bubble != null)
+            // 紀錄是否有找到至少一個符合的
+            bool isFound = false;
+
+            // 找出遊戲區塊內所有圖片物件
+            foreach (Control item in plGameRegion.Controls)
             {
-                // TODO: 播放音效
-                _currentBubbles.Remove(bubble);
-                _score += 5;
+                if (item is PictureBox picture)
+                {
+                    if ((string)item.Tag == input)
+                    {
+                        // 移除泡泡
+                        item.Dispose();
+                        // 得分
+                        _score += 5;
+
+                        // 播放音效
+                        WMPLib.WindowsMediaPlayer wplayer = new WMPLib.WindowsMediaPlayer();
+                        wplayer.URL = ResourcesHelper.GetSoundFilePath(SoundEnum.Correct);
+                        wplayer.controls.play();
+
+                        // 若畫面有多個,只取最早出現的那個(一次只消除一個)
+                        isFound = true;
+                        break;
+                    }
+                }
             }
+
             // 沒有任何一個泡泡答案吻合
-            else
+            if (!isFound)
             {
-                // TODO: 播放音效
                 // TODO: 切換圖片
+                // 播放音效
+                WMPLib.WindowsMediaPlayer wplayer = new WMPLib.WindowsMediaPlayer();
+                wplayer.URL = ResourcesHelper.GetSoundFilePath(SoundEnum.Error);
+                wplayer.controls.play();
             }
             // 計算分數
             CalScore();
@@ -99,6 +119,7 @@ namespace WF_H_010_TypewritingGaming
         /// <param name="e"></param>
         private void btnStart_Click(object sender, EventArgs e)
         {
+            // TODO: 待補齊按鈕邏輯
             if (btnStart.Text != "暫停")
             {
                 tmCountdown.Start(); // 圖片生成timer啟動
@@ -136,15 +157,30 @@ namespace WF_H_010_TypewritingGaming
         {
             _lastTime--;
             lblLastTime.Text = "倒數：" + _lastTime + "秒";
+            if (_lastTime <= 0)
+            {
+                tmCountdown.Stop();
+                tmFall.Stop();
+                btnStart.Text = "重新挑戰";
+
+                // 播放音效
+                WMPLib.WindowsMediaPlayer wplayer = new WMPLib.WindowsMediaPlayer();
+                wplayer.URL = ResourcesHelper.GetSoundFilePath(SoundEnum.Congratulations);
+                wplayer.controls.play();
+                MessageBox.Show("時間到！", "遊戲結束", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
             // 亂數決定ASCII Code (範圍33-123)
             int asciiCode = _rand.Next(33, 126);
 
             // 產生一個ASCII圖片物件
             PictureBox picture = new PictureBox();
-            picture.Image = ResourcesHelper.GetAsciiBitmap(asciiCode);
-            //picture.Height = 20;
-            //picture.Width = 20;
+            picture.BackgroundImage = ResourcesHelper.GetAsciiBitmap(asciiCode);
+            // 設定圖片形式為延展
+            picture.BackgroundImageLayout = ImageLayout.Stretch;
+            picture.Height = 50;
+            picture.Width = 50;
             // 答案存在tag內
             picture.Tag = asciiCode;
             picture.Top = 0;
@@ -177,6 +213,11 @@ namespace WF_H_010_TypewritingGaming
                         {
                             _score = 0;
                         }
+
+                        // 播放音效
+                        WMPLib.WindowsMediaPlayer wplayer = new WMPLib.WindowsMediaPlayer();
+                        wplayer.URL = ResourcesHelper.GetSoundFilePath(SoundEnum.Bounce);
+                        wplayer.controls.play();
                     }
                 }
             }

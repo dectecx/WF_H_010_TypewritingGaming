@@ -11,6 +11,25 @@ namespace WF_H_010_TypewritingGaming.Helper
     public static class ResourcesHelper
     {
         /// <summary>
+        /// 取得指定音效檔案相對路徑
+        /// </summary>
+        /// <param name="soundEnum">音效種類</param>
+        /// <returns></returns>
+        public static string GetSoundFilePath(SoundEnum soundEnum)
+        {
+            string filePath = "Resources\\Sounds\\";
+            switch (soundEnum)
+            {
+                case SoundEnum.BackgroundMusic: return filePath + "BackgroundMusic.wav";
+                case SoundEnum.Correct: return filePath + "Correct.wav";
+                case SoundEnum.Error: return filePath + "Error.wav";
+                case SoundEnum.Bounce: return filePath + "Bounce.wav";
+                case SoundEnum.Congratulations: return filePath + "Congratulations.wav";
+                default: return null;
+            }
+        }
+
+        /// <summary>
         /// 取得指定音效資料流
         /// </summary>
         /// <param name="soundEnum">音效種類</param>

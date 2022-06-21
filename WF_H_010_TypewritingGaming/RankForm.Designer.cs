@@ -34,7 +34,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(302, 450);
+            this.ClientSize = new System.Drawing.Size(193, 450);
             this.Name = "RankForm";
             this.Text = "RankForm";
             this.ResumeLayout(false);
