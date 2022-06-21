@@ -42,6 +42,21 @@ namespace WF_H_010_TypewritingGaming
         }
 
         /// <summary>
+        /// 輸入框按下按鈕
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtInput_KeyDown(object sender, KeyEventArgs e)
+        {
+            // 按下Enter
+            if (e.KeyCode == Keys.Return)
+            {
+                // 觸發確定按鈕Click事件
+                btnOK.PerformClick();
+            }
+        }
+
+        /// <summary>
         /// 確定按鈕
         /// </summary>
         /// <param name="sender"></param>
