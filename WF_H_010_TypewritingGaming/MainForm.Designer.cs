@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.plGameRegion = new System.Windows.Forms.Panel();
             this.btnRank = new System.Windows.Forms.Button();
             this.plGameInfo = new System.Windows.Forms.Panel();
@@ -128,9 +129,10 @@
             this.Controls.Add(this.btnRank);
             this.Controls.Add(this.plGameRegion);
             this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "泡泡打字遊戲";
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MainForm_KeyPress);
             this.plGameInfo.ResumeLayout(false);
             this.plGameInfo.PerformLayout();

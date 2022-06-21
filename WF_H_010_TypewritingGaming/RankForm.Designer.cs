@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RankForm));
             this.plRecords = new System.Windows.Forms.Panel();
             this.lblAnchorId = new System.Windows.Forms.Label();
             this.lblAnchorName = new System.Windows.Forms.Label();
@@ -90,8 +91,9 @@
             this.Controls.Add(this.lblAnchorName);
             this.Controls.Add(this.lblAnchorId);
             this.Controls.Add(this.plRecords);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RankForm";
-            this.Text = "RankForm";
+            this.Text = "排行榜";
             this.Load += new System.EventHandler(this.RankForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

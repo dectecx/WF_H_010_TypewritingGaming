@@ -234,6 +234,7 @@
     <Content Include="Resources\Images\bg_rank.jpg" />
     <Content Include="Resources\Images\burst_bubble.png" />
     <Content Include="Resources\Images\full_bubble.png" />
+    <Content Include="Resources\Images\icon.ico" />
     <Content Include="Resources\Sounds\BackgroundMusic.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
