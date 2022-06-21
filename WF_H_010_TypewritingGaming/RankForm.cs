@@ -68,18 +68,24 @@ namespace WF_H_010_TypewritingGaming
                 idLabel.Text = item.Id;
                 idLabel.Left = lblAnchorId.Left;
                 idLabel.Top = currentHeight;
+                idLabel.Font = new Font("微軟正黑體", 14F, FontStyle.Regular, GraphicsUnit.Point, 136);
+                idLabel.ForeColor = Color.White;
                 plRecords.Controls.Add(idLabel);
 
                 Label nameLabel = new Label();
                 nameLabel.Text = item.Name;
                 nameLabel.Left = lblAnchorName.Left;
                 nameLabel.Top = currentHeight;
+                nameLabel.Font = new Font("微軟正黑體", 14F, FontStyle.Regular, GraphicsUnit.Point, 136);
+                nameLabel.ForeColor = Color.White;
                 plRecords.Controls.Add(nameLabel);
 
                 Label scoreLabel = new Label();
                 scoreLabel.Text = item.Score.ToString();
                 scoreLabel.Left = lblAnchorScore.Left;
                 scoreLabel.Top = currentHeight;
+                scoreLabel.Font = new Font("微軟正黑體", 14F, FontStyle.Regular, GraphicsUnit.Point, 136);
+                scoreLabel.ForeColor = Color.White;
                 plRecords.Controls.Add(scoreLabel);
 
                 currentHeight += 30;
