@@ -1001,12 +1001,11 @@ namespace WF_H_010_TypewritingGaming.Properties {
         }
         
         /// <summary>
-        ///   查詢類型 System.Byte[] 的當地語系化資源。
+        ///   查詢類似 System.IO.MemoryStream 的類型 System.IO.UnmanagedMemoryStream 當地語系化資源。
         /// </summary>
-        internal static byte[] BackgroundMusic {
+        internal static System.IO.UnmanagedMemoryStream BackgroundMusic {
             get {
-                object obj = ResourceManager.GetObject("BackgroundMusic", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetStream("BackgroundMusic", resourceCulture);
             }
         }
         
@@ -1031,12 +1030,11 @@ namespace WF_H_010_TypewritingGaming.Properties {
         }
         
         /// <summary>
-        ///   查詢類型 System.Byte[] 的當地語系化資源。
+        ///   查詢類似 System.IO.MemoryStream 的類型 System.IO.UnmanagedMemoryStream 當地語系化資源。
         /// </summary>
-        internal static byte[] Bounce {
+        internal static System.IO.UnmanagedMemoryStream Bounce {
             get {
-                object obj = ResourceManager.GetObject("Bounce", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetStream("Bounce", resourceCulture);
             }
         }
         
@@ -1051,32 +1049,29 @@ namespace WF_H_010_TypewritingGaming.Properties {
         }
         
         /// <summary>
-        ///   查詢類型 System.Byte[] 的當地語系化資源。
+        ///   查詢類似 System.IO.MemoryStream 的類型 System.IO.UnmanagedMemoryStream 當地語系化資源。
         /// </summary>
-        internal static byte[] Congratulations {
+        internal static System.IO.UnmanagedMemoryStream Congratulations {
             get {
-                object obj = ResourceManager.GetObject("Congratulations", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetStream("Congratulations", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查詢類型 System.Byte[] 的當地語系化資源。
+        ///   查詢類似 System.IO.MemoryStream 的類型 System.IO.UnmanagedMemoryStream 當地語系化資源。
         /// </summary>
-        internal static byte[] Correct {
+        internal static System.IO.UnmanagedMemoryStream Correct {
             get {
-                object obj = ResourceManager.GetObject("Correct", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetStream("Correct", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查詢類型 System.Byte[] 的當地語系化資源。
+        ///   查詢類似 System.IO.MemoryStream 的類型 System.IO.UnmanagedMemoryStream 當地語系化資源。
         /// </summary>
-        internal static byte[] Error {
+        internal static System.IO.UnmanagedMemoryStream Error {
             get {
-                object obj = ResourceManager.GetObject("Error", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetStream("Error", resourceCulture);
             }
         }
         

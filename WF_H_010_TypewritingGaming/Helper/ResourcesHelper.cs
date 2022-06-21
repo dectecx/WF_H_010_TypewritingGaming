@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.IO;
 using WF_H_010_TypewritingGaming.Enums;
 using WF_H_010_TypewritingGaming.Properties;
 
@@ -13,7 +14,7 @@ namespace WF_H_010_TypewritingGaming.Helper
         /// 取得指定音效資料流
         /// </summary>
         /// <param name="soundEnum">音效種類</param>
-        public static byte[] GetSoundStream(SoundEnum soundEnum)
+        public static Stream GetSoundStream(SoundEnum soundEnum)
         {
             switch (soundEnum)
             {

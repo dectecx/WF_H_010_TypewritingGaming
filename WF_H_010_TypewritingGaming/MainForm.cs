@@ -46,8 +46,8 @@ namespace WF_H_010_TypewritingGaming
             // 亂數產生器
             _rand = new Random();
             // 循環播放背景音效
-            //_backgroundSound = new SoundPlayer(new MemoryStream(ResourcesHelper.GetSoundStream(SoundEnum.BackgroundMusic)));
-            //_backgroundSound.PlayLooping();
+            _backgroundSound = new SoundPlayer(ResourcesHelper.GetSoundStream(SoundEnum.BackgroundMusic));
+            _backgroundSound.PlayLooping();
 
             // 初始化
             tmCountdown.Stop();
