@@ -76,7 +76,7 @@ namespace WF_H_010_TypewritingGaming
             tmCountdown.Stop();
             tmBubbleGenerate.Stop();
             tmFall.Stop();
-            _maxGameTime = 3;
+            _maxGameTime = 60;
             _lastTime = _maxGameTime;
             lblLastTime.Text = "倒數：" + _lastTime + "秒";
             CalScore();
@@ -183,18 +183,11 @@ namespace WF_H_010_TypewritingGaming
                 btnStart.Text = "繼續遊戲";
                 btnStart.BackColor = Color.LightGreen;
             }
-            // 當前狀態為剛啟動 or 遊戲暫停 || 遊戲結束
+            // 當前狀態為遊戲結束
             else if (_gameStatus == GameStatus.GameOver)
             {
-                // 清除所有泡泡,找出遊戲區塊內所有圖片物件
-                foreach (Control item in plGameRegion.Controls)
-                {
-                    if (item is PictureBox picture)
-                    {
-                        // 移除泡泡
-                        picture.Dispose();
-                    }
-                }
+                // 清除所有泡泡,移除遊戲區塊內所有物件
+                plGameRegion.Controls.Clear();
 
                 // 初始化
                 _lastTime = _maxGameTime;
@@ -210,7 +203,7 @@ namespace WF_H_010_TypewritingGaming
                 // 啟動圖片掉落timer
                 tmFall.Start();
                 btnStart.Text = "暫停遊戲";
-                btnStart.BackColor = Color.LightGreen;
+                btnStart.BackColor = Color.LightPink;
             }
             else
             {
@@ -246,6 +239,7 @@ namespace WF_H_010_TypewritingGaming
                 tmBubbleGenerate.Stop();
                 tmFall.Stop();
                 btnStart.Text = "重新挑戰";
+                btnStart.BackColor = Color.LightGreen;
 
                 // 播放音效
                 WMPLib.WindowsMediaPlayer wplayer = new WMPLib.WindowsMediaPlayer();
